@@ -4,20 +4,19 @@ import Home from "./components/Home";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
+import Achievements from "./components/Achievements";
 import Contact from "./components/Contact";
-// Import baaki components bhi
 
-function App() {
+export default function App() {
   return (
     <>
       <Navbar />
       <Home />
-      <Projects/>
-      <Experience/>
-      <Skills/>
-      <Contact/>
-      {/* Yahan Projects, Experience, Skills, Contact laga do */}
+      <Projects />
+      <Experience />
+      <Skills />
+      <Achievements />
+      <Contact />
     </>
   );
 }
-export default App;

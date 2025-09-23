@@ -23,3 +23,7 @@ section {
   border-radius: 8px;
   padding: 1rem 2rem;
 }
+
+html {
+  scroll-behavior: smooth;
+}
