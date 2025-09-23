@@ -34,6 +34,24 @@ export default function Projects() {
             <Text mt="sm">{p.description}</Text>
           </Card>
         ))}
+        <Card
+  shadow="xl"
+  radius="xl"
+  p="lg"
+  withBorder
+  sx={{
+    transition: 'transform 0.2s',
+    '&:hover': { transform: 'scale(1.04)', boxShadow: '0 10px 32px rgba(0,0,0,0.18)' }
+  }}
+>
+  <Text weight={700} size="lg">Pathfactory Dashboards</Text>
+  <Group spacing={5}>
+    <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>REACT</Badge>
+    <Badge variant="gradient" gradient={{ from: 'violet', to: 'blue' }}>TYPESCRIPT</Badge>
+    {/*...*/}
+  </Group>
+  <Text mt="sm" color="dimmed">Enterprise dashboards, dynamic filters...</Text>
+</Card>
       </SimpleGrid>
     </Container>
   );

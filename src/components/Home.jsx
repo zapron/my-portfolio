@@ -1,28 +1,56 @@
-import React from "react";
-import { Container, Title, Text, Paper, Space, Group, Anchor } from "@mantine/core";
+import {
+  Container,
+  Title,
+  Text,
+  Group,
+  Anchor,
+  Paper,
+  Box,
+  Space,
+} from "@mantine/core";
 
 function Home() {
+
   return (
     <Container id="home" size="sm" mt={40}>
-      <Paper shadow="md" radius="lg" p="xl">
-        <Title order={2} align="center" mb="xs">
+      <Box
+        sx={{
+          background: "linear-gradient(90deg, #3b82f6 0%, #414142ff 100%)",
+          borderRadius: "lg",
+          boxShadow: "0 8px 32px rgba(60,34,170,0.12)",
+          padding: "2rem",
+        }}
+      >
+        <Title
+          order={2}
+          align="center"
+          color="white"
+          mb="xs"
+          style={{ textShadow: "0 2px 24px #3338" }}
+        >
           Raktim C Bhowmick
         </Title>
-        <Text color="dimmed" align="center" size="lg">
+        <Text align="center" size="lg" color="gray.1">
           Frontend Engineer | Kolkata
         </Text>
-        <Space h="md" />
-        <Text align="center">
-          7+ years of experience building web/mobile apps. Love React, TypeScript, UI/UX, mentoring and innovation.
+        <Text align="center" color="white" mt="md">
+          7+ years of building web/mobile apps. React, TypeScript, UI/UX,
+          innovation!
         </Text>
         <Space h="md" />
         <Group position="center">
-          <Anchor href="mailto:raktim.info@gmail.com">raktim.info@gmail.com</Anchor>
-          <Anchor href="https://www.linkedin.com/in/raktim24" target="_blank">
+          <Anchor href="mailto:raktim.info@gmail.com" color="yellow">
+            raktim.info@gmail.com
+          </Anchor>
+          <Anchor
+            href="https://www.linkedin.com/in/raktim24"
+            color="yellow"
+            target="_blank"
+          >
             LinkedIn
           </Anchor>
         </Group>
-      </Paper>
+      </Box>
     </Container>
   );
 }
