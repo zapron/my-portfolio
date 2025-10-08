@@ -10,17 +10,18 @@ import {
   Progress,
   Stack,
 } from "@mantine/core";
+import SkillsRiver from "./SkillsRiver";
 
 const skillMatrix = [
-  {
-    group: "Core Frontend",
-    items: [
-      { name: "React", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "Mantine / Styled / Tailwind", level: 85 },
-      { name: "Redux / Recoil", level: 80 },
-    ],
-  },
+  // {
+  //   group: "Core Frontend",
+  //   items: [
+  //     { name: "React", level: 90 },
+  //     { name: "TypeScript", level: 85 },
+  //     { name: "Mantine / Styled / Tailwind", level: 85 },
+  //     { name: "Redux / Recoil", level: 80 },
+  //   ],
+  // },
   {
     group: "Data & APIs",
     items: [
@@ -50,6 +51,7 @@ export default function Skills() {
       <Title order={3} align="center">
         Skills
       </Title>
+      <SkillsRiver/>
       <SimpleGrid cols={1} spacing="lg" mt="md">
         {skillMatrix.map(({ group, items }) => (
           <Card key={group} withBorder shadow="sm" radius="md" p="lg">
@@ -68,6 +70,7 @@ export default function Skills() {
           </Card>
         ))}
       </SimpleGrid>
+      
     </Container>
   );
 }
