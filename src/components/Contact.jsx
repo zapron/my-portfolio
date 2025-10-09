@@ -1,13 +1,6 @@
+// src/components/Contact.jsx
 import React, { useState } from "react";
-import {
-  Container,
-  Title,
-  TextInput,
-  Textarea,
-  Button,
-  Group,
-  Box,
-} from "@mantine/core";
+import { Container, Title, TextInput, Textarea, Button, Group, Box, SimpleGrid } from "@mantine/core";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -25,12 +18,13 @@ export default function Contact() {
   };
 
   return (
-    <Container id="contact" size="sm" mt={40}>
+    <Container id="contact" size="sm" mt={40} mb={80}>
       <Title order={3} align="center">
         Contact
       </Title>
       <Box component="form" onSubmit={handleSubmit} mt="md">
-        <Group grow>
+        {/* Use SimpleGrid for a responsive layout */}
+        <SimpleGrid cols={{ base: 1, sm: 2 }}>
           <TextInput
             label="Your name"
             value={form.name}
@@ -44,7 +38,7 @@ export default function Contact() {
             type="email"
             required
           />
-        </Group>
+        </SimpleGrid>
         <Textarea
           label="Message"
           value={form.message}

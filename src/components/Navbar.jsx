@@ -1,14 +1,18 @@
 // src/components/Navbar.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
   Group,
   Paper,
-  useMantineColorScheme, // Hook to get theme functions
-  ActionIcon, // A button for icons
+  useMantineColorScheme,
+  ActionIcon,
+  Burger,
+  Drawer,
+  Stack,
 } from "@mantine/core";
-import { IconSun, IconMoonStars } from "@tabler/icons-react"; // Icons
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { IconSun, IconMoonStars } from "@tabler/icons-react";
 
 const SECTIONS = [
   "home",
@@ -21,8 +25,14 @@ const SECTIONS = [
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme(); // Get theme state
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  
+  // This hook now reliably controls which view is shown.
+  // We'll use a standard breakpoint from Mantine's theme for consistency.
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
+  // Scrollspy effect
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -30,7 +40,7 @@ export default function Navbar() {
           if (entry.isIntersecting) setActive(entry.target.id);
         });
       },
-      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
+      { rootMargin: "-40% 0px -50% 0px" }
     );
     SECTIONS.forEach((id) => {
       const el = document.getElementById(id);
@@ -39,61 +49,63 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  const buttons = useMemo(
-    () =>
-      SECTIONS.map((id) => (
-        <Button
-          key={id}
-          variant={active === id ? "light" : "subtle"}
-          component="a"
-          href={`#${id}`}
-        >
-          {id[0].toUpperCase() + id.slice(1)}
-        </Button>
-      )),
-    [active]
-  );
+  // Create links (used for both desktop and mobile drawer)
+  const links = SECTIONS.map((id) => (
+    <Button
+      key={id}
+      variant={active === id ? "light" : "subtle"}
+      component="a"
+      href={`#${id}`}
+      onClick={closeDrawer} // This will close the drawer on mobile when a link is clicked
+      size="md"
+    >
+      {id[0].toUpperCase() + id.slice(1)}
+    </Button>
+  ));
 
   return (
-    <Paper
-      withBorder
-      shadow="xs"
-      radius={0}
-      sx={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        backdropFilter: "blur(10px)",
-        backgroundColor:
-          colorScheme === "dark" ? "rgba(26, 27, 30, 0.8)" : "rgba(255, 255, 255, 0.8)",
-      }}
-    >
-      <Container size="md" py="sm">
-        <Group position="apart">
-          <Group spacing="xl">{buttons}</Group>
-          {/* Dark Mode Toggle Button */}
-          <ActionIcon
-            onClick={() => toggleColorScheme()}
-            size="lg"
-            sx={(theme) => ({
-              backgroundColor:
-                theme.colorScheme === "dark"
-                  ? theme.colors.dark[6]
-                  : theme.colors.gray[0],
-              color:
-                theme.colorScheme === "dark"
-                  ? theme.colors.yellow[4]
-                  : theme.colors.blue[6],
-            })}
-          >
-            {colorScheme === "dark" ? (
-              <IconSun size="1.2rem" />
+    <>
+      <Drawer
+        opened={drawerOpened}
+        onClose={closeDrawer}
+        title="Navigation"
+        padding="md"
+        size="sm"
+      >
+        <Stack>{links}</Stack>
+      </Drawer>
+
+      <Paper
+        withBorder
+        shadow="xs"
+        radius={0}
+        sx={{ position: "sticky", top: 0, zIndex: 50, backdropFilter: "blur(10px)" }}
+      >
+        <Container size="md" py="sm">
+          <Group position="apart">
+            {/* CORRECTED LOGIC:
+              We use a ternary operator with the 'isMobile' constant.
+              If the screen is mobile, show the Burger.
+              If it's not mobile, show the Group of links.
+            */}
+            {isMobile ? (
+              <Burger
+                opened={drawerOpened}
+                onClick={toggleDrawer}
+                size="sm"
+              />
             ) : (
-              <IconMoonStars size="1.2rem" />
+              <Group spacing="xl">
+                {links}
+              </Group>
             )}
-          </ActionIcon>
-        </Group>
-      </Container>
-    </Paper>
+            
+            <ActionIcon onClick={() => toggleColorScheme()} size="lg">
+              {colorScheme === "dark" ? <IconSun /> : <IconMoonStars />}
+            </ActionIcon>
+          </Group>
+        </Container>
+      </Paper>
+    </>
   );
 }

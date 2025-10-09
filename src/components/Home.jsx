@@ -9,11 +9,11 @@ import {
   Space,
   Button,
   Avatar,
-  ActionIcon, // Changed from Anchor
+  ActionIcon,
 } from "@mantine/core";
-import { TypeAnimation } from "react-type-animation"; // For typing effect
-import { IconBrandLinkedin, IconMail } from "@tabler/icons-react"; // Icons
-import profileImage from "../assets/profile.jpg"; // Ensure you have a profile image
+import { TypeAnimation } from "react-type-animation";
+import { IconBrandLinkedin, IconMail } from "@tabler/icons-react";
+import profileImage from "../assets/profile.jpg";
 
 const AVATAR_URL = profileImage;
 
@@ -37,9 +37,13 @@ export default function Home() {
           background: `linear-gradient(135deg, ${theme.colors.blue[8]} 0%, ${theme.colors.gray[9]} 100%)`,
           borderRadius: theme.radius.lg,
           boxShadow: theme.shadows.xl,
-          padding: "2rem",
-          textAlign: "center",
           color: "white",
+          textAlign: "center",
+          // Responsive padding
+          padding: theme.spacing.xl,
+          [theme.fn.smallerThan('sm')]: {
+            padding: theme.spacing.md,
+          },
         })}
       >
         <Avatar
@@ -52,56 +56,54 @@ export default function Home() {
           alt="Raktim C Bhowmick"
         />
 
+        {/* Responsive Title */}
         <Title
           order={1}
-          align="center"
-          style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}
+          style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)", fontSize: 'clamp(2rem, 6vw, 2.5rem)' }}
         >
           Raktim C Bhowmick
         </Title>
-
-        {/* Typing Animation */}
+        
+        {/* Responsive Subtitle */}
         <TypeAnimation
           sequence={[
-            "Frontend Engineer",
-            2000,
-            "Full-Stack Developer",
-            2000,
-            "React & TypeScript Expert",
-            2000,
+            "Senior Frontend Engineer", 2000,
+            "Senior Full-stack Engineer", 2000,
+            "React & TypeScript Expert", 2000,
           ]}
           wrapper="span"
           speed={50}
+          repeat={Infinity}
           style={{
-            fontSize: "1.25rem",
             display: "inline-block",
             color: "#C1C2C5",
+            fontSize: 'clamp(1rem, 4vw, 1.25rem)', // Responsive font size
           }}
-          repeat={Infinity}
         />
 
-        <Text align="center" mt="md">
+        <Text mt="md">
           7+ years building enterprise dashboards & rich UI/UX with React,
           TypeScript, GraphQL, Mantine, Node.js.
         </Text>
         <Space h="md" />
-        <Group position="center" spacing="md">
-          <Button component="a" href="#projects" variant="filled" size="md">
+
+        {/* Responsive Button Group */}
+        <Group position="center" spacing="md" sx={(theme) => ({
+            [theme.fn.smallerThan('xs')]: {
+                flexDirection: 'column',
+                width: '100%',
+            }
+        })}>
+          <Button component="a" href="#projects" variant="filled" size="md" fullWidth sx={(theme) => ({ [theme.fn.largerThan('xs')]: { width: 'auto' } })}>
             View Projects
           </Button>
-          <Button
-            component="a"
-            href="/cv.pdf"
-            variant="outline"
-            size="md"
-            color="white"
-          >
+          <Button component="a" href="/cv.pdf" variant="outline" size="md" color="white" fullWidth sx={(theme) => ({ [theme.fn.largerThan('xs')]: { width: 'auto' } })}>
             Download CV
           </Button>
         </Group>
+        
         <Space h="sm" />
         <Group position="center" spacing="lg" mt="md">
-          {/* Icon Links */}
           <ActionIcon
             component="a"
             href="mailto:raktim.info@gmail.com"
