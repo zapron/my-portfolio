@@ -84,6 +84,11 @@ export default function Navbar() {
           top: 0,
           zIndex: 50,
           backdropFilter: "blur(10px)",
+          // FIX: Re-added the semi-transparent background for the glass effect
+          backgroundColor:
+            colorScheme === "dark"
+              ? "rgba(26, 27, 30, 0.85)"
+              : "rgba(255, 255, 255, 0.7)",
         }}
       >
         <Container size="md" py="sm">
