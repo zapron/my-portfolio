@@ -25,9 +25,10 @@ const SECTIONS = [
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    useDisclosure(false);
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  
+
   // This hook now reliably controls which view is shown.
   // We'll use a standard breakpoint from Mantine's theme for consistency.
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -68,7 +69,6 @@ export default function Navbar() {
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
-        title="Navigation"
         padding="md"
         size="sm"
       >
@@ -79,7 +79,12 @@ export default function Navbar() {
         withBorder
         shadow="xs"
         radius={0}
-        sx={{ position: "sticky", top: 0, zIndex: 50, backdropFilter: "blur(10px)" }}
+        sx={{
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          backdropFilter: "blur(10px)",
+        }}
       >
         <Container size="md" py="sm">
           <Group position="apart">
@@ -89,17 +94,11 @@ export default function Navbar() {
               If it's not mobile, show the Group of links.
             */}
             {isMobile ? (
-              <Burger
-                opened={drawerOpened}
-                onClick={toggleDrawer}
-                size="sm"
-              />
+              <Burger opened={drawerOpened} onClick={toggleDrawer} size="sm" />
             ) : (
-              <Group spacing="xl">
-                {links}
-              </Group>
+              <Group spacing="xl">{links}</Group>
             )}
-            
+
             <ActionIcon onClick={() => toggleColorScheme()} size="lg">
               {colorScheme === "dark" ? <IconSun /> : <IconMoonStars />}
             </ActionIcon>
