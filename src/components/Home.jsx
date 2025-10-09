@@ -13,8 +13,9 @@ import {
 } from "@mantine/core";
 import { TypeAnimation } from "react-type-animation"; // For typing effect
 import { IconBrandLinkedin, IconMail } from "@tabler/icons-react"; // Icons
+import profileImage from "../assets/profile.jpg"; // Ensure you have a profile image
 
-const AVATAR_URL = "src/assets/profile.jpg";
+const AVATAR_URL = profileImage;
 
 export default function Home() {
   return (
