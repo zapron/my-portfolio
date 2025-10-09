@@ -14,26 +14,24 @@ import {
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { IconSun, IconMoonStars } from "@tabler/icons-react";
 
+// ADDED "Education" and "Certifications" to the list
 const SECTIONS = [
   "home",
   "projects",
   "experience",
   "skills",
+  "education",
+  "certifications",
   "achievements",
   "contact",
 ];
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-    useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-
-  // This hook now reliably controls which view is shown.
-  // We'll use a standard breakpoint from Mantine's theme for consistency.
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // Scrollspy effect
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -50,14 +48,13 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Create links (used for both desktop and mobile drawer)
   const links = SECTIONS.map((id) => (
     <Button
       key={id}
       variant={active === id ? "light" : "subtle"}
       component="a"
       href={`#${id}`}
-      onClick={closeDrawer} // This will close the drawer on mobile when a link is clicked
+      onClick={closeDrawer}
       size="md"
     >
       {id[0].toUpperCase() + id.slice(1)}
@@ -69,6 +66,7 @@ export default function Navbar() {
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
+        title="Navigation"
         padding="md"
         size="sm"
       >
@@ -84,7 +82,6 @@ export default function Navbar() {
           top: 0,
           zIndex: 50,
           backdropFilter: "blur(10px)",
-          // FIX: Re-added the semi-transparent background for the glass effect
           backgroundColor:
             colorScheme === "dark"
               ? "rgba(26, 27, 30, 0.85)"
@@ -93,17 +90,18 @@ export default function Navbar() {
       >
         <Container size="md" py="sm">
           <Group position="apart">
-            {/* CORRECTED LOGIC:
-              We use a ternary operator with the 'isMobile' constant.
-              If the screen is mobile, show the Burger.
-              If it's not mobile, show the Group of links.
-            */}
             {isMobile ? (
-              <Burger opened={drawerOpened} onClick={toggleDrawer} size="sm" />
+              <Burger
+                opened={drawerOpened}
+                onClick={toggleDrawer}
+                size="sm"
+              />
             ) : (
-              <Group spacing="xl">{links}</Group>
+              <Group spacing="xl">
+                {links}
+              </Group>
             )}
-
+            
             <ActionIcon onClick={() => toggleColorScheme()} size="lg">
               {colorScheme === "dark" ? <IconSun /> : <IconMoonStars />}
             </ActionIcon>

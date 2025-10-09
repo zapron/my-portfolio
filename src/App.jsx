@@ -1,7 +1,7 @@
 // src/App.jsx
 import React, { useState } from "react";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
-import { theme } from "./theme"; // Make sure you have created src/theme.js
+import { theme } from "./theme";
 
 // Import all your components
 import Navbar from "./components/Navbar";
@@ -13,6 +13,8 @@ import Achievements from "./components/Achievements";
 import Contact from "./components/Contact";
 import FadeIn from "./components/FadeIn";
 import WhatsAppButton from "./components/WhatsAppButton";
+import Education from "./components/Education"; // <-- 1. IMPORT Education
+import Certifications from "./components/Certifications"; // <-- 2. IMPORT Certifications
 
 export default function App() {
   const [colorScheme, setColorScheme] = useState("light");
@@ -29,14 +31,17 @@ export default function App() {
         withGlobalStyles
         withNormalizeCSS
       >
-        {/* All your components now live inside the providers */}
         <Navbar />
         <FadeIn><Home /></FadeIn>
         <FadeIn><Projects /></FadeIn>
         <FadeIn><Experience /></FadeIn>
         <FadeIn><Skills /></FadeIn>
+        {/* 3. ADD the new components in the correct order */}
+        <FadeIn><Education /></FadeIn>
+        <FadeIn><Certifications /></FadeIn>
         <FadeIn><Achievements /></FadeIn>
         <FadeIn><Contact /></FadeIn>
+
         <WhatsAppButton />
       </MantineProvider>
     </ColorSchemeProvider>
