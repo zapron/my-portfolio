@@ -119,7 +119,7 @@ export default function Navbar() {
 
   return (
     <>
-      <Drawer opened={drawerOpened} onClose={closeDrawer} title="Navigation" padding="md" size="sm">
+      <Drawer opened={drawerOpened} onClose={closeDrawer} padding="md" size="sm">
         <Stack>{mobileLinks}</Stack>
       </Drawer>
 
