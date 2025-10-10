@@ -80,7 +80,7 @@ export default function Experience() {
       <Timeline active={-1} bulletSize={16} lineWidth={2} mt="md">
         {roles.map((r) => (
           <Timeline.Item key={`${r.period}-${r.role}`} title={`${r.role} · ${r.company}`}>
-            <Text size="sm" color="dimmed">{r.period}</Text>
+            <Text size="sm" color="orange">{r.period}</Text>
             <Card withBorder radius="md" p="md" mt={8}>
               <Text size="sm">{r.summary}</Text>
               <List size="sm" spacing={4} mt="xs">

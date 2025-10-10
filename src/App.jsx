@@ -1,7 +1,6 @@
 // src/App.jsx
 import React, { useState } from "react";
-// 1. Import the 'Global' component from Mantine
-import { MantineProvider, ColorSchemeProvider, Global } from "@mantine/core";
+import { MantineProvider, ColorSchemeProvider, Global, Box } from "@mantine/core";
 import { theme } from "./theme";
 
 // Import all your components
@@ -18,7 +17,7 @@ import Education from "./components/Education";
 import Certifications from "./components/Certifications";
 
 export default function App() {
-  const [colorScheme, setColorScheme] = useState("light");
+  const [colorScheme, setColorScheme] = useState("dark");
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
@@ -32,27 +31,71 @@ export default function App() {
         withGlobalStyles
         withNormalizeCSS
       >
-        {/* 2. Add the Global style for scroll padding */}
         <Global
           styles={(theme) => ({
+            // This is the CSS for our new animated background
+            '.aurora-background': {
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              zIndex: -1, // Place it behind all content
+              overflow: 'hidden',
+              filter: 'blur(40px)', // Soften the overall effect
+            },
+            '.aurora-background::before, .aurora-background::after': {
+              content: '""',
+              position: 'absolute',
+              borderRadius: '50%',
+              opacity: 0.4,
+            },
+            '.aurora-background::before': {
+              width: '50vw',
+              height: '50vw',
+              background: 'radial-gradient(circle, #5f7fff, transparent 60%)',
+              top: '-10%',
+              left: '-10%',
+              animation: 'moveAurora1 20s infinite alternate',
+            },
+            '.aurora-background::after': {
+              width: '60vw',
+              height: '60vw',
+              background: 'radial-gradient(circle, #339af0, transparent 60%)',
+              bottom: '-20%',
+              right: '-20%',
+              animation: 'moveAurora2 25s infinite alternate',
+            },
+            '@keyframes moveAurora1': {
+              '0%': { transform: 'translate(0, 0) scale(1)' },
+              '100%': { transform: 'translate(100px, 100px) scale(1.2)' },
+            },
+            '@keyframes moveAurora2': {
+              '0%': { transform: 'translate(0, 0) scale(1)' },
+              '100%': { transform: 'translate(-100px, -100px) scale(0.8)' },
+            },
             'html': {
-              // This leaves a 70px space at the top when scrolling to an anchor link
               scrollPaddingTop: 70, 
             },
           })}
         />
+        
+        {/* The Aurora background div */}
+        <div className="aurora-background" />
 
-        <Navbar />
-        <FadeIn><Home /></FadeIn>
-        <FadeIn><Projects /></FadeIn>
-        <FadeIn><Experience /></FadeIn>
-        <FadeIn><Skills /></FadeIn>
-        <FadeIn><Education /></FadeIn>
-        <FadeIn><Certifications /></FadeIn>
-        <FadeIn><Achievements /></FadeIn>
-        <FadeIn><Contact /></FadeIn>
-
-        <WhatsAppButton />
+        {/* Wrap main content to ensure it's on top of the background */}
+        <Box style={{ position: 'relative', zIndex: 1 }}>
+          <Navbar />
+          <FadeIn><Home /></FadeIn>
+          <FadeIn><Projects /></FadeIn>
+          <FadeIn><Experience /></FadeIn>
+          <FadeIn><Skills /></FadeIn>
+          <FadeIn><Education /></FadeIn>
+          <FadeIn><Certifications /></FadeIn>
+          <FadeIn><Achievements /></FadeIn>
+          <FadeIn><Contact /></FadeIn>
+          <WhatsAppButton />
+        </Box>
       </MantineProvider>
     </ColorSchemeProvider>
   );

@@ -10,12 +10,12 @@ import {
   Burger,
   Drawer,
   Stack,
-  Menu, // <-- Import the Menu component
+  Menu,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { IconSun, IconMoonStars, IconChevronDown } from "@tabler/icons-react";
 
-// NEW: A more structured way to handle nav items, including dropdowns
+// Structured navigation items for the dropdown menu
 const NAV_ITEMS = [
   { type: 'link', label: 'Home', href: '#home' },
   { type: 'link', label: 'Projects', href: '#projects' },
@@ -33,11 +33,10 @@ const NAV_ITEMS = [
   { type: 'link', label: 'Contact', href: '#contact' },
 ];
 
-// We still need a flat list for the scrollspy
+// A flat list of all section IDs, needed for the scrollspy effect
 const ALL_SECTIONS = NAV_ITEMS.flatMap(item => 
   item.type === 'link' ? [item.href.substring(1)] : item.links.map(link => link.href.substring(1))
 );
-
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
@@ -111,7 +110,6 @@ export default function Navbar() {
             </Button>
         )
     }
-    // For mobile, we can just list all the dropdown items directly
     return item.links.map(link => (
         <Button key={link.label} variant={active === link.href.substring(1) ? "light" : "subtle"} component="a" href={link.href} onClick={closeDrawer} size="md" fullWidth>
             {link.label}
@@ -125,7 +123,19 @@ export default function Navbar() {
         <Stack>{mobileLinks}</Stack>
       </Drawer>
 
-      <Paper withBorder shadow="xs" radius={0} sx={{ position: "sticky", top: 0, zIndex: 50, backdropFilter: "blur(10px)", backgroundColor: colorScheme === "dark" ? "rgba(26, 27, 30, 0.85)" : "rgba(255, 255, 255, 0.7)" }}>
+      <Paper
+        withBorder
+        shadow="xs"
+        radius={0}
+        sx={{
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          // This component will now get its style from the theme by default.
+          // We just need to ensure the backdropFilter is here to create the blur.
+          backdropFilter: "blur(12px)",
+        }}
+      >
         <Container size="md" py="sm">
           <Group position="apart">
             {isMobile ? (
