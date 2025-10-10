@@ -24,7 +24,7 @@ const roles = [
     period: "Jul 2021 — Present",
     logo: senecaLogo,
     summary:
-      "Lead developer on PathFactory enterprise dashboards and Content Library UX revamp; shipped PFRI dashboards, dynamic filters, and advanced tables end‑to‑end.",
+      "Lead developer on PathFactory enterprise dashboards and Content Library UX revamp, shipped PFRI dashboards, dynamic filters, and advanced tables end‑to‑end.",
     bullets: [
       "Designed & built UCL / Goals / Content Play / Campaigns / Buying Signals / PFRI dashboards (React, TS, Inertia, Mantine, Styled, Apollo).",
       "Delivered New Content Library UX revamp; reusable dynamic filters, custom pagination, and table components.",
@@ -49,7 +49,7 @@ const roles = [
     period: "Jan 2020 — Jul 2021",
     logo: cernerLogo,
     summary:
-      "Modernized legacy app with Terra; owned a scalable module end‑to‑end and drove test coverage.",
+      "Modernized legacy app with Terra, owned a scalable module end‑to‑end and drove test coverage.",
     bullets: [
       "Built 50+ component features with Terra for class & functional components.",
       "Wrote 100+ unit tests with Jest/Enzyme reaching ~100% workflow coverage.",
@@ -73,8 +73,8 @@ const roles = [
     logo: cernerLogo,
     summary: "Accelerated regression by heavy automation for RoR web apps.",
     bullets: [
-      "Authored 100+ Capybara automation scripts; cut manual time by ~60%.",
-      "Wrote 20 POM scripts for Page Repository; reduced vertical regression time by ~40%.",
+      "Authored 100+ Capybara automation scripts, cut manual time by ~60%.",
+      "Wrote 20 POM scripts for Page Repository, reduced vertical regression time by ~40%.",
       "Automated ~80% client workflows using Selenium (Python/Java) + internal tools (Touchstone/Eggplant).",
     ],
     tech: ["Selenium", "Ruby", "Python", "Java", "Capybara", "Mocha", "Chai"],
@@ -140,7 +140,7 @@ export default function Experience() {
             </Group>
 
             <Card withBorder radius="md" p="lg" mt="md">
-              <Text size="sm">{r.summary}</Text>
+              <Text fw={600} size="md">{r.summary}</Text>
               <List size="sm" spacing={4} mt="xs">
                 {r.bullets.map((b, i) => (
                   <List.Item key={i}>{b}</List.Item>
