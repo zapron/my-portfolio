@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { TypeAnimation } from "react-type-animation";
 import { IconBrandLinkedin, IconMail } from "@tabler/icons-react";
-import profileImage from "../assets/profile.jpg";
+import profileImage from "../assets/image.jpg";
 
 const AVATAR_URL = profileImage;
 
