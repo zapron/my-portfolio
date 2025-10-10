@@ -10,6 +10,7 @@ import {
   Badge,
   Card,
   Image,
+  Anchor
 } from "@mantine/core";
 
 // Imports for local logos remain the same
@@ -129,18 +130,31 @@ export default function Experience() {
                 {r.period}
               </Text>
 
-              <Image
-                src={r.logo}
-                alt={`${r.company} logo`}
-                width={80}
-                height="100%" // You can easily adjust this size
-                mt="md"
-                radius="sm"
-              />
+              <Anchor
+                sx={{ cursor: "pointer" }}
+                href={
+                  r.company === "SenecaGlobal"
+                    ? "https://senecaglobal.com"
+                    : "https://cerner.com"
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={r.logo}
+                  alt={`${r.company} logo`}
+                  width={80}
+                  height="100%" // You can easily adjust this size
+                  mt="md"
+                  radius="sm"
+                />
+              </Anchor>
             </Group>
 
             <Card withBorder radius="md" p="lg" mt="md">
-              <Text fw={600} size="md">{r.summary}</Text>
+              <Text fw={600} size="md">
+                {r.summary}
+              </Text>
               <List size="sm" spacing={4} mt="xs">
                 {r.bullets.map((b, i) => (
                   <List.Item key={i}>{b}</List.Item>
