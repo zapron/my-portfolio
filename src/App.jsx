@@ -15,6 +15,7 @@ import FadeIn from "./components/FadeIn";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Education from "./components/Education";
 import Certifications from "./components/Certifications";
+import AIIntegration from "./components/AIIntegration";
 
 export default function App() {
   const [colorScheme, setColorScheme] = useState("dark");
@@ -90,6 +91,7 @@ export default function App() {
           <FadeIn><Projects /></FadeIn>
           <FadeIn><Experience /></FadeIn>
           <FadeIn><Skills /></FadeIn>
+           <FadeIn><AIIntegration /></FadeIn>
           <FadeIn><Education /></FadeIn>
           <FadeIn><Certifications /></FadeIn>
           <FadeIn><Achievements /></FadeIn>
