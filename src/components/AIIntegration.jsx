@@ -68,7 +68,6 @@ function AIRow({ reverse = false, speed = 45 }) {
               src={logo.src}
               aria-label={logo.name}
               alt={logo.name}
-              // FIX: Use custom size if available, otherwise default to 32
               height={logo.height || 32}
               width={logo.width || 32}
               style={{
@@ -121,8 +120,8 @@ export default function AIIntegration() {
           </Text>
 
           <Box>
-            <AIRow speed={40} />
-            <AIRow reverse speed={45} />
+            <AIRow speed={25} />
+            <AIRow reverse speed={25} />
           </Box>
 
           <Divider my="sm" label="How I Leverage AI" labelPosition="center" />

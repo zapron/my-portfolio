@@ -39,9 +39,8 @@ export default function Home() {
           boxShadow: theme.shadows.xl,
           color: "white",
           textAlign: "center",
-          // Responsive padding
           padding: theme.spacing.xl,
-          [theme.fn.smallerThan('sm')]: {
+          [theme.fn.smallerThan("sm")]: {
             padding: theme.spacing.md,
           },
         })}
@@ -56,20 +55,24 @@ export default function Home() {
           alt="Raktim C Bhowmick"
         />
 
-        {/* Responsive Title */}
         <Title
           order={1}
-          style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)", fontSize: 'clamp(2rem, 6vw, 2.5rem)' }}
+          style={{
+            textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+            fontSize: "clamp(2rem, 6vw, 2.5rem)",
+          }}
         >
           Raktim C Bhowmick
         </Title>
-        
-        {/* Responsive Subtitle */}
+
         <TypeAnimation
           sequence={[
-            "Senior Frontend Engineer", 2000,
-            "Senior Full-stack Engineer", 2000,
-            "React & TypeScript Expert", 2000,
+            "Senior Tecnical Analyst",
+            2000,
+            "Senior Full-Stack Engineer",
+            2000,
+            "React & TypeScript Expert",
+            2000,
           ]}
           wrapper="span"
           speed={50}
@@ -77,7 +80,7 @@ export default function Home() {
           style={{
             display: "inline-block",
             color: "#C1C2C5",
-            fontSize: 'clamp(1rem, 4vw, 1.25rem)', // Responsive font size
+            fontSize: "clamp(1rem, 4vw, 1.25rem)", // Responsive font size
           }}
         />
 
@@ -88,20 +91,39 @@ export default function Home() {
         <Space h="md" />
 
         {/* Responsive Button Group */}
-        <Group position="center" spacing="md" sx={(theme) => ({
-            [theme.fn.smallerThan('xs')]: {
-                flexDirection: 'column',
-                width: '100%',
-            }
-        })}>
-          <Button component="a" href="#projects" variant="filled" size="md" fullWidth sx={(theme) => ({ [theme.fn.largerThan('xs')]: { width: 'auto' } })}>
+        <Group
+          position="center"
+          spacing="md"
+          sx={(theme) => ({
+            [theme.fn.smallerThan("xs")]: {
+              flexDirection: "column",
+              width: "100%",
+            },
+          })}
+        >
+          <Button
+            component="a"
+            href="#projects"
+            variant="filled"
+            size="md"
+            fullWidth
+            sx={(theme) => ({ [theme.fn.largerThan("xs")]: { width: "auto" } })}
+          >
             View Projects
           </Button>
-          <Button component="a" href="/cv.pdf" variant="outline" size="md" color="white" fullWidth sx={(theme) => ({ [theme.fn.largerThan('xs')]: { width: 'auto' } })}>
+          <Button
+            component="a"
+            href="/cv.pdf"
+            variant="outline"
+            size="md"
+            color="white"
+            fullWidth
+            sx={(theme) => ({ [theme.fn.largerThan("xs")]: { width: "auto" } })}
+          >
             Download CV
           </Button>
         </Group>
-        
+
         <Space h="sm" />
         <Group position="center" spacing="lg" mt="md">
           <ActionIcon
