@@ -1,7 +1,7 @@
 // === src/components/SkillsRiver.jsx ===
-import React from 'react';
+
 import { Container, Title, Box, useMantineTheme } from '@mantine/core';
-import mantineLogo from '../assets/mantine-logo.svg';
+
 
 // Use CDN logos (Devicon).
 const LOGOS = [
