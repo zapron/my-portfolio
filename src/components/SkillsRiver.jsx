@@ -11,11 +11,16 @@ const LOGOS = [
   { name: 'Node.js', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
   { 
     name: 'Mantine', 
-    src: mantineLogo // CORRECTED: This is the official and most stable link.
+    src: "https://logo.svgcdn.com/l/mantine-icon.svg"// CORRECTED: This is the official and most stable link.
   }, 
   { 
     name: 'Tailwind CSS', 
-    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg', // CORRECTED: Using a different, more reliable version of the icon.
+    src: 'https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg', // CORRECTED: Using a different, more reliable version of the icon.
+    dark: true // This version of the logo looks better inverted in dark mode
+  },
+    { 
+    name: 'React Native', 
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/React-icon.svg', // CORRECTED: Using a different, more reliable version of the icon.
     dark: true // This version of the logo looks better inverted in dark mode
   },
   { name: 'Ant Design', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/antdesign/antdesign-original.svg' },

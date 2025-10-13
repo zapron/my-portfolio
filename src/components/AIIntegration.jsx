@@ -14,10 +14,12 @@ import {
 } from "@mantine/core";
 import { IconRocket, IconShieldCheck, IconBrain } from "@tabler/icons-react";
 
+// FIX: Added custom height and width for DeepSeek and Perplexity
 const AI_LOGOS = [
   {
     name: "ChatGPT",
     src: "https://commons.wikimedia.org/wiki/Special:FilePath/ChatGPT-Logo.svg",
+    invertInDark: true,
   },
   {
     name: "Gemini",
@@ -26,27 +28,33 @@ const AI_LOGOS = [
   {
     name: "GitHub Copilot",
     src: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-copilot-icon.svg",
+    invertInDark: true,
   },
   {
     name: "Groq",
     src: "https://commons.wikimedia.org/wiki/Special:FilePath/Groq_logo.svg",
+    invertInDark: true,
   },
   {
     name: "DeepSeek",
     src: "https://commons.wikimedia.org/wiki/Special:FilePath/DeepSeek_logo.svg",
+    invertInDark: true,
+    height: 40,
+    width: 80,  
   },
   {
     name: "Perplexity",
     src: "https://commons.wikimedia.org/wiki/Special:FilePath/Perplexity_AI_logo.svg",
+    invertInDark: true,
+    height: 40, 
+    width: 80,  
   },
 ];
 
-// --- The "River" row component, localized to this file ---
+
 function AIRow({ reverse = false, speed = 45 }) {
   const theme = useMantineTheme();
   const items = [...AI_LOGOS, ...AI_LOGOS];
-  const textColor =
-    theme.colorScheme === "dark" ? theme.colors.gray[5] : theme.colors.gray[7];
 
   return (
     <div
@@ -55,23 +63,21 @@ function AIRow({ reverse = false, speed = 45 }) {
     >
       <ul className="marquee__content">
         {items.map((logo, i) => (
-          <li
-            key={`${logo.name}-${i}`}
-            className="marquee__item"
-          //  title={logo.name}
-          >
+          <li key={`${logo.name}-${i}`} className="marquee__item" title={logo.name}>
             <img
               src={logo.src}
               aria-label={logo.name}
               alt={logo.name}
-              height={32}
-              width={32}
+              // FIX: Use custom size if available, otherwise default to 32
+              height={logo.height || 32}
+              width={logo.width || 32}
+              style={{
+                filter:
+                  theme.colorScheme === "dark" && logo.invertInDark
+                    ? "invert(1)"
+                    : undefined,
+              }}
             />
-            {/* <span
-              style={{ marginTop: "8px", fontSize: "12px", color: textColor }}
-            >
-              {logo.name}
-            </span> */}
           </li>
         ))}
       </ul>
@@ -114,7 +120,6 @@ export default function AIIntegration() {
             workflow.
           </Text>
 
-          {/* --- NEW: The AI River Component --- */}
           <Box>
             <AIRow speed={40} />
             <AIRow reverse speed={45} />
@@ -149,7 +154,6 @@ export default function AIIntegration() {
         </Stack>
       </Card>
 
-      {/* --- NEW: Local CSS for the river, scoped to this component --- */}
       <style>{`
         .marquee { 
           --gap: 64px;
