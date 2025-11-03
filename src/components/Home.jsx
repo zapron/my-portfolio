@@ -113,7 +113,7 @@ export default function Home() {
           </Button>
           <Button
             component="a"
-            href="/cv.pdf"
+            href="/Raktim_Frontend_fullstack_2025.pdf"
             variant="outline"
             size="md"
             color="white"
