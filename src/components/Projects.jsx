@@ -1,80 +1,148 @@
-import React from 'react'
-import { Container, Title, Card, Text, Group, Badge, SimpleGrid, List, Stack, Divider } from '@mantine/core'
+import React from "react";
+import {
+  Badge,
+  Button,
+  Card,
+  Container,
+  Grid,
+  Group,
+  List,
+  SimpleGrid,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
+import { IconArrowUpRight, IconCheck } from "@tabler/icons-react";
 
-// Pulls highlights verbatim from your CV summaries so the section "speaks skills".
-// Replace your src/components/Projects.jsx with this file.
-
-const featured = [
+const PROJECTS = [
   {
-    name: 'PathFactory Enterprise Dashboards',
-    period: '2021 — Present',
-    context:
-      'Design + development of enterprise dashboards (UCL, Goals, Content Play, Campaigns, Buying Signals, PFRI) with a New Content Library UX revamp.',
-    highlights: [
-      'Reusable dynamic filters, advanced table components & custom pagination',
-      'Timeline charts, tree‑structured grouping, AI‑driven content tagging',
-      'Advanced filter caching → better performance & UX',
-      'Expanded into Node services & API integrations; repo‑level compliance',
-      'Quality: SOLID + SSDL + RTL unit tests; mentoring & training contributions',
+    title: "PathFactory Enterprise Dashboards",
+    period: "2021 - Present",
+    summary:
+      "Designed and built a multi-dashboard ecosystem with reusable UX patterns for data-intensive enterprise workflows.",
+    impact: [
+      "Reusable dynamic filters and high-performance table patterns",
+      "Timeline and tree grouped analytics for complex business scenarios",
+      "AI-assisted content tagging and filter caching for faster insight delivery",
     ],
-    tech: ['React', 'TypeScript', 'Inertia', 'Mantine', 'Styled', 'GraphQL (Apollo)', 'Node.js'],
+    stack: [
+      "React",
+      "TypeScript",
+      "Mantine",
+      "GraphQL",
+      "Node.js",
+      "Testing Library",
+    ],
   },
   {
-    name: 'Personal React Native Apps',
-    period: 'Ongoing',
-    context:
-      'Shipped multiple mobile applications and introduced mobile development practices into the team.',
-    highlights: [
-      'Cross‑platform feature work: performance‑minded components & offline patterns',
-      'Reusable component library & theming; CI‑friendly architecture',
+    title: "Content Library UX Revamp",
+    period: "Product Initiative",
+    summary:
+      "Re-architected a legacy experience into a modern, scalable, and component-driven system with stronger information hierarchy.",
+    impact: [
+      "Improved discoverability with composable search and filtering",
+      "Introduced reusable visual building blocks and pagination flows",
+      "Reduced UI inconsistency across screens with shared patterns",
     ],
-    tech: ['React Native', 'Redux', 'Node.js', 'MongoDB'],
+    stack: ["React", "Styled Components", "Inertia", "Apollo", "Design Systems"],
   },
-]
+  {
+    title: "React Native Product Experiments",
+    period: "Ongoing",
+    summary:
+      "Built and iterated on cross-platform mobile projects with performance-first architecture and modular design.",
+    impact: [
+      "Reusable component primitives and centralized theming approach",
+      "Pragmatic state patterns for maintainable feature growth",
+      "Full-stack integration path with Node and MongoDB services",
+    ],
+    stack: ["React Native", "Redux", "Node.js", "MongoDB", "CI workflows"],
+  },
+];
 
-const smallWins = [
-  'Kaizen initiatives: dynamic filter optimization, workflow refactors, UI perf upgrades',
-  'Mentoring interns/associates; requirement & risk analysis sessions',
-]
+const MILESTONES = [
+  "Expanded from frontend ownership into full-stack delivery for key product tracks",
+  "Contributed to quality standards using SOLID principles and SSDL-aligned practices",
+  "Mentored associates and interns in architecture, review discipline, and delivery planning",
+];
 
 export default function Projects() {
   return (
-    <Container id="projects" size="sm" mt={40}>
-      <Title order={3} mb="md" align="center">Projects</Title>
+    <Container id="projects" size="lg" mt={38} className="section-anchor">
+      <Stack spacing="md" mb="lg">
+        <Badge color="cyan" variant="light" w="fit-content">
+          Featured Work
+        </Badge>
+        <Title order={2} className="section-title">
+          Products That Blend Scale, Clarity, and Velocity
+        </Title>
+        <Text className="section-subtext">
+          These projects represent my approach to modern product engineering:
+          robust frontend architecture, thoughtful UX decisions, and outcomes tied to
+          business value.
+        </Text>
+      </Stack>
 
       <SimpleGrid cols={1} spacing="lg">
-        {featured.map((p) => (
-          <Card key={p.name} withBorder shadow="sm" radius="md" p="lg">
-            <Stack spacing="xs">
-              <Group position="apart">
-                <Text weight={700}>{p.name}</Text>
-                <Badge variant="outline">{p.period}</Badge>
-              </Group>
-              <Text color="dimmed">{p.context}</Text>
-              <Divider my="xs" />
-              <List spacing={6} size="sm">
-                {p.highlights.map((h) => (
-                  <List.Item key={h}>{h}</List.Item>
-                ))}
-              </List>
-              <Group spacing={6} mt={4}>
-                {p.tech.map((t) => (
-                  <Badge key={t} color="blue" variant="light">{t}</Badge>
-                ))}
-              </Group>
-            </Stack>
+        {PROJECTS.map((project) => (
+          <Card key={project.title} radius="lg" p="lg" withBorder>
+            <Grid align="flex-start">
+              <Grid.Col span={12} md={8}>
+                <Stack spacing={10}>
+                  <Group position="apart">
+                    <Title order={3}>{project.title}</Title>
+                    <Badge color="amber" variant="light">
+                      {project.period}
+                    </Badge>
+                  </Group>
+                  <Text className="muted-copy">{project.summary}</Text>
+                  <List
+                    spacing={7}
+                    icon={<IconCheck size={16} stroke={2.4} color="var(--mantine-color-cyan-4)" />}
+                  >
+                    {project.impact.map((point) => (
+                      <List.Item key={point}>{point}</List.Item>
+                    ))}
+                  </List>
+                </Stack>
+              </Grid.Col>
+
+              <Grid.Col span={12} md={4}>
+                <Stack spacing={12}>
+                  <Text fw={700}>Tech Stack</Text>
+                  <Group spacing={8}>
+                    {project.stack.map((tech) => (
+                      <Badge key={tech} color="cyan" variant="outline">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </Group>
+                </Stack>
+              </Grid.Col>
+            </Grid>
           </Card>
         ))}
+      </SimpleGrid>
 
-        <Card withBorder radius="md" p="lg">
-          <Text weight={600}>Additional Highlights</Text>
-          <List spacing={6} size="sm" mt={6}>
-            {smallWins.map((w) => (
-              <List.Item key={w}>{w}</List.Item>
+      <Card radius="lg" mt="lg" p="lg" withBorder>
+        <Stack spacing={12}>
+          <Title order={4}>Delivery Highlights</Title>
+          <List spacing={8}>
+            {MILESTONES.map((point) => (
+              <List.Item key={point}>{point}</List.Item>
             ))}
           </List>
-        </Card>
-      </SimpleGrid>
+          <Button
+            component="a"
+            href="#contact"
+            variant="light"
+            rightIcon={<IconArrowUpRight size={16} />}
+            w="fit-content"
+          >
+            Discuss Collaboration
+          </Button>
+        </Stack>
+      </Card>
     </Container>
-  )
+  );
 }

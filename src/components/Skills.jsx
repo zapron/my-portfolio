@@ -1,93 +1,167 @@
-// src/components/Skills.jsx
 import React from "react";
 import {
-  Container,
-  Title,
+  Badge,
   Card,
-  Text,
+  Container,
   Group,
-  SimpleGrid,
   Progress,
+  SimpleGrid,
   Stack,
+  Text,
   ThemeIcon,
+  Title,
 } from "@mantine/core";
-import { IconDeviceDesktopCode, IconDatabase, IconChartDonut, IconShieldCheck } from "@tabler/icons-react";
-import SkillsRiver from "./SkillsRiver";
+import {
+  IconApi,
+  IconChartDots3,
+  IconCode,
+  IconShieldCheck,
+  IconStack3,
+} from "@tabler/icons-react";
 
-// Data derived from your resume's SKILLS section
-const skillData = [
+const SKILL_GROUPS = [
   {
-    group: "Frontend",
-    icon: IconDeviceDesktopCode,
+    group: "Frontend Engineering",
+    icon: IconCode,
+    color: "cyan",
     skills: [
-      { name: "React.js, Redux, Recoil", level: 95, citation: [71] },
-      { name: "TypeScript & JavaScript (ES6+)", level: 90, citation: [71] },
-      { name: "Mantine UI, Styled Components, Tailwind CSS", level: 90, citation: [71] },
-      { name: "HTML5, CSS3, Responsive UI/UX", level: 85, citation: [71] },
-      { name: "React Native", level: 75, citation: [71] },
+      { name: "React.js and state architecture", level: 95 },
+      { name: "TypeScript and modern JavaScript", level: 92 },
+      { name: "Responsive UI systems", level: 90 },
+      { name: "Component libraries and design systems", level: 88 },
     ],
   },
   {
-    group: "Backend & APIs",
-    icon: IconDatabase,
+    group: "Backend and Integrations",
+    icon: IconApi,
+    color: "amber",
     skills: [
-      { name: "Node.js, Express.js", level: 80, citation: [75] },
-      { name: "GraphQL (Apollo)", level: 85, citation: [75] },
-      { name: "MongoDB, SQL", level: 70, citation: [75] },
+      { name: "Node.js and Express", level: 84 },
+      { name: "GraphQL and API integration", level: 87 },
+      { name: "Service-layer feature ownership", level: 80 },
+      { name: "Data modeling and persistence", level: 75 },
     ],
   },
   {
-    group: "Data Visualization",
-    icon: IconChartDonut,
+    group: "Visualization and Product UX",
+    icon: IconChartDots3,
+    color: "cyan",
     skills: [
-      { name: "D3.js, Nivo Charts, Recharts", level: 80, citation: [73] },
-      { name: "AG Grid", level: 75, citation: [73] },
+      { name: "Data-rich dashboard architecture", level: 90 },
+      { name: "Information hierarchy and interaction design", level: 86 },
+      { name: "Performance-minded table systems", level: 88 },
+      { name: "Feature usability optimization", level: 85 },
     ],
   },
   {
-    group: "Testing & Quality",
+    group: "Testing and Quality Discipline",
     icon: IconShieldCheck,
+    color: "amber",
     skills: [
-      { name: "React Testing Library, Jest, Enzyme", level: 90, citation: [77] },
-      { name: "SOLID Principles & SSDL", level: 85, citation: [77] },
-      { name: "Selenium WebDriver", level: 70, citation: [77] },
+      { name: "Unit and integration testing", level: 90 },
+      { name: "SOLID and maintainable code patterns", level: 87 },
+      { name: "Quality gates and review practices", level: 86 },
+      { name: "Automation strategy", level: 82 },
     ],
   },
 ];
 
+const TOOLBELT = [
+  "React",
+  "TypeScript",
+  "Mantine",
+  "Styled Components",
+  "Tailwind CSS",
+  "React Native",
+  "GraphQL",
+  "Apollo",
+  "Node.js",
+  "Express",
+  "MongoDB",
+  "SQL",
+  "Jest",
+  "React Testing Library",
+  "Selenium",
+  "GitHub Actions",
+];
+
 export default function Skills() {
   return (
-    <Container id="skills" size="sm" mt={40}>
-      <Title order={2} align="center">
-        Skills
-      </Title>
+    <Container id="skills" size="lg" mt={38} className="section-anchor">
+      <Stack spacing="md" mb="lg">
+        <Badge color="cyan" variant="light" w="fit-content">
+          Engineering Capability Map
+        </Badge>
+        <Title order={2} className="section-title">
+          End-to-End Skills for Product-Scale Delivery
+        </Title>
+      </Stack>
 
-      <SkillsRiver />
+      <SimpleGrid
+        cols={2}
+        spacing="lg"
+        breakpoints={[
+          { maxWidth: "md", cols: 1, spacing: "md" },
+          { maxWidth: "sm", cols: 1, spacing: "sm" },
+        ]}
+      >
+        {SKILL_GROUPS.map(({ group, icon: Icon, color, skills }) => (
+          <Card key={group} radius="lg" p="lg" withBorder>
+            <Stack spacing={14}>
+              <Group spacing={12}>
+                <ThemeIcon
+                  size={44}
+                  radius="md"
+                  variant="light"
+                  color={color}
+                >
+                  <Icon size={20} />
+                </ThemeIcon>
+                <Text fw={700} size="lg">
+                  {group}
+                </Text>
+              </Group>
 
-      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg" mt="xl">
-        {skillData.map(({ group, icon: Icon, skills }) => (
-          <Card key={group} withBorder shadow="sm" radius="md" p="lg">
-            <Group>
-              <ThemeIcon size="xl" radius="md" variant="light">
-                <Icon size="1.5rem" />
-              </ThemeIcon>
-              <Text weight={700} size="lg">{group}</Text>
-            </Group>
-            <Stack spacing="md" mt="lg">
               {skills.map((skill) => (
-                <div key={skill.name}>
+                <Stack key={skill.name} spacing={6}>
                   <Group position="apart">
                     <Text size="sm">{skill.name}</Text>
-                    <Text size="sm" color="dimmed">{skill.level}%</Text>
+                    <Text size="sm" className="muted-copy">
+                      {skill.level}%
+                    </Text>
                   </Group>
-                  <Progress value={skill.level} mt={5} size="lg" radius="xl" animated />
-                </div>
+                  <Progress
+                    value={skill.level}
+                    size="lg"
+                    radius="xl"
+                    color={color}
+                    striped
+                    animated
+                  />
+                </Stack>
               ))}
             </Stack>
           </Card>
         ))}
       </SimpleGrid>
-      
+
+      <Card radius="lg" p="lg" mt="lg" withBorder>
+        <Stack spacing={12}>
+          <Group spacing={10}>
+            <ThemeIcon variant="light" color="cyan" size={38}>
+              <IconStack3 size={19} />
+            </ThemeIcon>
+            <Title order={4}>Toolbelt</Title>
+          </Group>
+          <Group spacing={8}>
+            {TOOLBELT.map((tool) => (
+              <Badge key={tool} color="cyan" variant="outline">
+                {tool}
+              </Badge>
+            ))}
+          </Group>
+        </Stack>
+      </Card>
     </Container>
   );
 }

@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+  --bg-main: #050913;
+  --bg-deep: #071328;
+  --bg-halo-cyan: rgba(14, 41, 70, 0.9);
+  --bg-halo-amber: rgba(63, 58, 27, 0.82);
+  --text-main: #f3f8ff;
+  --text-soft: #c7d6e8;
+  --accent-copy: #7fd7ff;
+  --orb-cyan: rgba(68, 200, 255, 0.8);
+  --orb-amber: rgba(245, 122, 31, 0.52);
+  --grid-line: rgba(133, 189, 215, 0.08);
+  --line: rgba(138, 223, 255, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  color: var(--text-main);
+  background: radial-gradient(circle at 15% 15%, var(--bg-halo-cyan) 0%, transparent 45%),
+    radial-gradient(circle at 85% 10%, var(--bg-halo-amber) 0%, transparent 34%),
+    linear-gradient(140deg, var(--bg-main), var(--bg-deep));
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.site-bg::before,
+.site-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(72px);
+  opacity: 0.45;
+}
+
+.site-bg::before {
+  width: 42vw;
+  height: 42vw;
+  left: -8vw;
+  top: -14vh;
+  background: radial-gradient(circle, var(--orb-cyan), transparent 72%);
+  animation: drift-a 16s ease-in-out infinite alternate;
+}
+
+.site-bg::after {
+  width: 46vw;
+  height: 46vw;
+  right: -10vw;
+  bottom: -22vh;
+  background: radial-gradient(circle, var(--orb-amber), transparent 68%);
+  animation: drift-b 20s ease-in-out infinite alternate;
+}
+
+.site-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
+}
+
+.main-shell {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 64px;
+}
+
+.section-anchor {
+  scroll-margin-top: 100px;
+}
+
+.muted-copy {
+  color: var(--text-soft);
+}
+
+.accent-copy {
+  color: var(--accent-copy);
+}
+
+@keyframes drift-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(90px, 42px) scale(1.18);
+  }
+}
+
+@keyframes drift-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-72px, -46px) scale(0.85);
+  }
+}
+
+@media (max-width: 768px) {
+  .site-grid {
+    background-size: 36px 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .site-bg::before,
+  .site-bg::after {
+    animation: none;
+  }
+}

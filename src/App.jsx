@@ -1,9 +1,7 @@
-// src/App.jsx
 import React, { useState } from "react";
 import { MantineProvider, ColorSchemeProvider, Global, Box } from "@mantine/core";
 import { theme } from "./theme";
 
-// Import all your components
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Projects from "./components/Projects";
@@ -33,65 +31,57 @@ export default function App() {
         withNormalizeCSS
       >
         <Global
-          styles={(theme) => ({
-            // This is the CSS for our new animated background
-            '.aurora-background': {
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-              zIndex: -1, // Place it behind all content
-              overflow: 'hidden',
-              filter: 'blur(40px)', // Soften the overall effect
-            },
-            '.aurora-background::before, .aurora-background::after': {
-              content: '""',
-              position: 'absolute',
-              borderRadius: '50%',
-              opacity: 0.4,
-            },
-            '.aurora-background::before': {
-              width: '50vw',
-              height: '50vw',
-              background: 'radial-gradient(circle, #5f7fff, transparent 60%)',
-              top: '-10%',
-              left: '-10%',
-              animation: 'moveAurora1 20s infinite alternate',
-            },
-            '.aurora-background::after': {
-              width: '60vw',
-              height: '60vw',
-              background: 'radial-gradient(circle, #339af0, transparent 60%)',
-              bottom: '-20%',
-              right: '-20%',
-              animation: 'moveAurora2 25s infinite alternate',
-            },
-            '@keyframes moveAurora1': {
-              '0%': { transform: 'translate(0, 0) scale(1)' },
-              '100%': { transform: 'translate(100px, 100px) scale(1.2)' },
-            },
-            '@keyframes moveAurora2': {
-              '0%': { transform: 'translate(0, 0) scale(1)' },
-              '100%': { transform: 'translate(-100px, -100px) scale(0.8)' },
-            },
-            'html': {
-              scrollPaddingTop: 70, 
-            },
-          })}
-        />
-        
-        {/* The Aurora background div */}
-        <div className="aurora-background" />
+          styles={(theme) => {
+            const isDark = theme.colorScheme === "dark";
 
-        {/* Wrap main content to ensure it's on top of the background */}
-        <Box style={{ position: 'relative', zIndex: 1 }}>
+            return {
+              body: {
+                color: isDark ? theme.white : theme.colors.dark[8],
+                "--bg-main": isDark ? "#050913" : "#f4f8ff",
+                "--bg-deep": isDark ? "#071328" : "#e9f2ff",
+                "--bg-halo-cyan": isDark
+                  ? "rgba(14, 41, 70, 0.9)"
+                  : "rgba(97, 173, 221, 0.46)",
+                "--bg-halo-amber": isDark
+                  ? "rgba(63, 58, 27, 0.82)"
+                  : "rgba(238, 194, 126, 0.55)",
+                "--text-main": isDark ? "#f3f8ff" : "#0f243f",
+                "--text-soft": isDark ? "#c7d6e8" : "#324a63",
+                "--accent-copy": isDark ? "#7fd7ff" : "#0c739c",
+                "--orb-cyan": isDark
+                  ? "rgba(68, 200, 255, 0.8)"
+                  : "rgba(116, 193, 240, 0.42)",
+                "--orb-amber": isDark
+                  ? "rgba(245, 122, 31, 0.52)"
+                  : "rgba(242, 170, 95, 0.34)",
+                "--grid-line": isDark
+                  ? "rgba(133, 189, 215, 0.08)"
+                  : "rgba(97, 138, 168, 0.2)",
+                "--line": isDark
+                  ? "rgba(138, 223, 255, 0.2)"
+                  : "rgba(74, 129, 166, 0.3)",
+              },
+              ".section-title": {
+                letterSpacing: "-0.02em",
+              },
+              ".section-subtext": {
+                color: "var(--text-soft)",
+                maxWidth: 640,
+              },
+            };
+          }}
+        />
+
+        <div className="site-bg" />
+        <div className="site-grid" />
+
+        <Box className="main-shell">
           <Navbar />
           <FadeIn><Home /></FadeIn>
           <FadeIn><Projects /></FadeIn>
           <FadeIn><Experience /></FadeIn>
           <FadeIn><Skills /></FadeIn>
-           <FadeIn><AIIntegration /></FadeIn>
+          <FadeIn><AIIntegration /></FadeIn>
           <FadeIn><Education /></FadeIn>
           <FadeIn><Certifications /></FadeIn>
           <FadeIn><Achievements /></FadeIn>

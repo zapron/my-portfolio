@@ -3,17 +3,10 @@ import React from "react";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 
-// --- CUSTOMIZE THIS ---
-// 1. Replace with your full phone number in international format.
-//    (e.g., for +91 12345 67890, use 911234567890)
-const PHONE_NUMBER = "918240565314"; // IMPORTANT: Replace with your number
-
-// 2. Customize the default message that users will send.
+const PHONE_NUMBER = "918240565314";
 const PRE_FILLED_MESSAGE = "Hello Raktim! I saw your portfolio and wanted to connect.";
-// --------------------
 
 export default function WhatsAppButton() {
-  // We need to encode the message to make it URL-safe
   const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
     PRE_FILLED_MESSAGE
   )}`;
@@ -28,19 +21,22 @@ export default function WhatsAppButton() {
         size="xl"
         radius="xl"
         variant="filled"
-        color="green" // WhatsApp's brand color
+        color="green"
         sx={(theme) => ({
-          // Style for the floating button
           position: "fixed",
-          bottom: theme.spacing.xl, // 30px from bottom
-          right: theme.spacing.xl,  // 30px from right
-          zIndex: 100, // Ensure it's on top of other content
-          boxShadow: theme.shadows.md,
-          transition: "transform 0.2s ease-in-out",
-
-          // Add a hover effect
+          bottom: theme.spacing.xl,
+          right: theme.spacing.xl,
+          zIndex: 100,
+          boxShadow: "0 14px 30px rgba(1, 20, 11, 0.4)",
+          border: "1px solid rgba(219, 255, 233, 0.45)",
+          transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
           "&:hover": {
-            transform: "scale(1.1)",
+            transform: "scale(1.07) translateY(-1px)",
+            boxShadow: "0 18px 36px rgba(1, 20, 11, 0.5)",
+          },
+          [theme.fn.smallerThan("sm")]: {
+            bottom: theme.spacing.md,
+            right: theme.spacing.md,
           },
         })}
       >
