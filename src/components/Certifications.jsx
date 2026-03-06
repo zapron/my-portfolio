@@ -1,48 +1,60 @@
-import React from 'react';
-import { Container, Title, SimpleGrid, Card, Text, Group, ThemeIcon } from '@mantine/core';
-import { IconCertificate } from '@tabler/icons-react';
+import React from "react";
+import {
+  Badge,
+  Card,
+  Container,
+  SimpleGrid,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+} from "@mantine/core";
+import { IconCertificate } from "@tabler/icons-react";
 
-const certificationsData = [
+const CERTIFICATIONS = [
   {
-    name: 'React + Redux, JavaScript, Java',
-    provider: 'Sololearn.com',
-    citation: [95]
+    name: "React, Redux, JavaScript, and Java",
+    provider: "SoloLearn",
   },
   {
-    name: 'React.js essential Training, React Hooks',
-    provider: 'LinkedIn.com',
-    citation: [96]
+    name: "React.js Essential Training and React Hooks",
+    provider: "LinkedIn Learning",
   },
   {
-    name: 'CutShort certified React.js Basic Developer',
-    provider: 'CutShort',
-    citation: [97]
+    name: "React.js Basic Developer Certification",
+    provider: "CutShort",
   },
 ];
 
 export default function Certifications() {
   return (
-    <Container id="certifications" size="sm" mt={40}>
-      <Title order={2} align="center">
-        Certifications
-      </Title>
-      <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg" mt="md">
-        {certificationsData.map((cert) => (
-          <Card key={cert.name} withBorder shadow="md" radius="md" p="lg">
-            <Group>
-              <ThemeIcon
-                size={40}
-                radius="md"
-                variant="gradient"
-                gradient={{ from: 'blue', to: 'cyan' }}
-              >
-                <IconCertificate size="1.5rem" />
+    <Container id="certifications" size="lg" mt={38} className="section-anchor">
+      <Stack spacing="md" mb="lg">
+        <Badge color="cyan" variant="light" w="fit-content">
+          Verified Learning
+        </Badge>
+        <Title order={2} className="section-title">
+          Certifications
+        </Title>
+      </Stack>
+
+      <SimpleGrid
+        cols={3}
+        spacing="lg"
+        breakpoints={[
+          { maxWidth: "md", cols: 2, spacing: "md" },
+          { maxWidth: "sm", cols: 1, spacing: "sm" },
+        ]}
+      >
+        {CERTIFICATIONS.map((cert) => (
+          <Card key={cert.name} radius="lg" p="lg" withBorder>
+            <Stack spacing={12}>
+              <ThemeIcon size={46} radius="md" color="cyan" variant="light">
+                <IconCertificate size={22} />
               </ThemeIcon>
-              <div>
-                <Text weight={600}>{cert.name}</Text>
-                <Text size="sm" color="dimmed">{cert.provider}</Text>
-              </div>
-            </Group>
+              <Text fw={700}>{cert.name}</Text>
+              <Text className="muted-copy">{cert.provider}</Text>
+            </Stack>
           </Card>
         ))}
       </SimpleGrid>

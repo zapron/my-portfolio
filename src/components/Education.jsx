@@ -1,62 +1,69 @@
-import React from 'react';
-import { Container, Title, SimpleGrid, Card, Text, Badge, List, ThemeIcon, Group } from '@mantine/core';
-import { IconPointFilled } from '@tabler/icons-react';
+import React from "react";
+import {
+  Badge,
+  Card,
+  Container,
+  Group,
+  SimpleGrid,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 
-const educationData = [
+const EDUCATION = [
   {
-    degree: 'Masters in Computer Applications (MCA)',
-    institution: 'Vellore Institute of Technology',
-    date: 'June 2017',
-    score: '9.15 CGPA overall',
-    details: ['Master thesis on Code Optimization'],
-    citations: {
-      degree: [63], institution: [63], date: [62], score: [64], details: [65]
-    }
+    degree: "Master of Computer Applications",
+    institution: "Vellore Institute of Technology",
+    date: "June 2017",
+    score: "9.15 CGPA",
+    note: "Thesis focus: Code Optimization",
   },
   {
-    degree: 'Bachelor of Science (BSc Hons Comp Sc)',
-    institution: 'Asutosh College, Calcutta University',
-    date: 'June 2015',
-    score: '60.1% placed in 1st Class',
-    details: [],
-    citations: {
-      degree: [67], institution: [67], date: [66], score: [68]
-    }
+    degree: "BSc (Hons) Computer Science",
+    institution: "Asutosh College, Calcutta University",
+    date: "June 2015",
+    score: "60.1%, First Class",
+    note: "Strong grounding in computing fundamentals and software design",
   },
 ];
 
 export default function Education() {
   return (
-    <Container id="education" size="sm" mt={40}>
-      <Title order={2} align="center">
-        Education
-      </Title>
-      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg" mt="md">
-        {educationData.map((edu) => (
-          <Card key={edu.degree} withBorder shadow="md" radius="md" p="lg">
-            <Group position="apart">
-              <Title order={4} sx={{ flex: 1 }}>{edu.degree}</Title>
-              <Badge variant="light">{edu.date}</Badge>
-            </Group>
-            <Text size="md" mt="sm">{edu.institution}</Text>
-            <Text size="sm" color="dimmed" mt={4}>{edu.score}</Text>
-            {edu.details.length > 0 && (
-              <List
-                spacing="xs"
-                size="sm"
-                center
-                mt="md"
-                icon={
-                  <ThemeIcon color="blue" size={16} radius="xl">
-                    <IconPointFilled size={12} />
-                  </ThemeIcon>
-                }
-              >
-                {edu.details.map((detail, index) => (
-                  <List.Item key={index}>{detail}</List.Item>
-                ))}
-              </List>
-            )}
+    <Container id="education" size="lg" mt={38} className="section-anchor">
+      <Stack spacing="md" mb="lg">
+        <Badge color="cyan" variant="light" w="fit-content">
+          Academic Foundation
+        </Badge>
+        <Title order={2} className="section-title">
+          Education
+        </Title>
+      </Stack>
+
+      <SimpleGrid
+        cols={2}
+        spacing="lg"
+        breakpoints={[
+          { maxWidth: "md", cols: 1, spacing: "md" },
+          { maxWidth: "sm", cols: 1, spacing: "sm" },
+        ]}
+      >
+        {EDUCATION.map((item) => (
+          <Card key={item.degree} radius="lg" p="lg" withBorder>
+            <Stack spacing={10}>
+              <Group position="apart">
+                <Title order={4}>{item.degree}</Title>
+                <Badge color="amber" variant="light">
+                  {item.date}
+                </Badge>
+              </Group>
+              <Text fw={600}>{item.institution}</Text>
+              <Text className="accent-copy" fw={700}>
+                {item.score}
+              </Text>
+              <Text className="muted-copy" size="sm">
+                {item.note}
+              </Text>
+            </Stack>
           </Card>
         ))}
       </SimpleGrid>

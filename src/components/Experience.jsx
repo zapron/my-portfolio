@@ -1,172 +1,121 @@
-// src/components/Experience.jsx
 import React from "react";
 import {
-  Container,
-  Title,
-  Timeline,
-  Text,
-  List,
-  Group,
+  Anchor,
   Badge,
   Card,
+  Container,
+  Group,
   Image,
-  Anchor
+  List,
+  Stack,
+  Text,
+  Timeline,
+  Title,
 } from "@mantine/core";
-
-// Imports for local logos remain the same
 import senecaLogo from "../assets/seneca-global-logo.svg";
 import cernerLogo from "../assets/oracle-cerner-logo.svg";
 
-// The data structure with the 'logo' property is still correct
-const roles = [
+const ROLES = [
   {
     role: "Technical Analyst (Frontend Research Engineer)",
     company: "SenecaGlobal",
-    period: "Jul 2021 — Present",
+    period: "Jul 2021 - Present",
     logo: senecaLogo,
     summary:
-      "Lead developer on PathFactory enterprise dashboards and Content Library UX revamp, shipped PFRI dashboards, dynamic filters, and advanced tables end‑to‑end.",
-    bullets: [
-      "Designed & built UCL / Goals / Content Play / Campaigns / Buying Signals / PFRI dashboards (React, TS, Inertia, Mantine, Styled, Apollo).",
-      "Delivered New Content Library UX revamp; reusable dynamic filters, custom pagination, and table components.",
-      "Implemented timeline charts, tree‑grouping, AI content tagging, and cached filters for performance.",
-      "Expanded into Node.js services, API integrations, and repo‑standard compliance.",
-      "Drove quality with SOLID, SSDL, and RTL unit tests; mentored interns and ran Req/Risk Analysis sessions.",
-      "Multiple Bravo Awards; Pursuit of Excellence; direct product/CTO appreciation.",
+      "Lead frontend engineer for enterprise dashboard programs and platform UX modernization.",
+    points: [
+      "Delivered UCL, Goals, Content Play, Campaigns, Buying Signals, and PFRI dashboards",
+      "Built reusable dynamic filters, custom pagination, and scalable table systems",
+      "Implemented AI-driven content tagging and timeline visualizations",
+      "Extended ownership into Node services, integration quality, and engineering standards",
     ],
-    tech: [
-      "React",
-      "TypeScript",
-      "Inertia",
-      "Mantine",
-      "Styled",
-      "GraphQL (Apollo)",
-      "Node.js",
-    ],
+    tech: ["React", "TypeScript", "Mantine", "Apollo GraphQL", "Node.js"],
+    link: "https://senecaglobal.com",
   },
   {
-    role: "Software Engineer (Full‑stack)",
+    role: "Software Engineer (Full Stack)",
     company: "Cerner Healthcare Solutions",
-    period: "Jan 2020 — Jul 2021",
+    period: "Jan 2020 - Jul 2021",
     logo: cernerLogo,
     summary:
-      "Modernized legacy app with Terra, owned a scalable module end‑to‑end and drove test coverage.",
-    bullets: [
-      "Built 50+ component features with Terra for class & functional components.",
-      "Wrote 100+ unit tests with Jest/Enzyme reaching ~100% workflow coverage.",
-      "Converted UI mockups to React Hooks; delivered pixel‑accurate module as sole owner.",
+      "Owned major module delivery while modernizing legacy patterns and driving testing quality.",
+    points: [
+      "Developed 50+ features using Terra component architecture",
+      "Wrote 100+ unit tests with close to full workflow coverage",
+      "Led hook-based refactors and pixel-accurate React implementations",
     ],
-    tech: [
-      "React",
-      "Terra",
-      "Redux",
-      "Jest",
-      "Enzyme",
-      "GraphQL",
-      "Node",
-      "Express",
-    ],
+    tech: ["React", "Terra", "Redux", "Jest", "Enzyme", "Node"],
+    link: "https://www.oracle.com/industries/health/",
   },
   {
-    role: "Test Automation Engineer",
+    role: "Quality and Automation Engineering",
     company: "Cerner Healthcare Solutions",
-    period: "Jan 2019 — Dec 2019",
+    period: "Jul 2017 - Dec 2019",
     logo: cernerLogo,
-    summary: "Accelerated regression by heavy automation for RoR web apps.",
-    bullets: [
-      "Authored 100+ Capybara automation scripts, cut manual time by ~60%.",
-      "Wrote 20 POM scripts for Page Repository, reduced vertical regression time by ~40%.",
-      "Automated ~80% client workflows using Selenium (Python/Java) + internal tools (Touchstone/Eggplant).",
+    summary:
+      "Built robust automated testing systems and requirement coverage processes for large healthcare workflows.",
+    points: [
+      "Automated major regression suites and reduced manual effort significantly",
+      "Produced high-volume test assets across workflow and load scenarios",
+      "Partnered with analysts and developers on risk-driven quality strategy",
     ],
-    tech: ["Selenium", "Ruby", "Python", "Java", "Capybara", "Mocha", "Chai"],
-  },
-  {
-    role: "Solution Designer · Test Analyst",
-    company: "Cerner Healthcare Solutions",
-    period: "Jan 2018 — Dec 2018",
-    logo: cernerLogo,
-    summary: "Owned requirements and test design for a large solution.",
-    bullets: [
-      "Captured requirements & technical writing covering ~100% client scope.",
-      "Produced 200+ test design docs and reviewed 100+ test plans.",
-    ],
-    tech: ["HP QC", "Soarian QM"],
-  },
-  {
-    role: "Test Analyst",
-    company: "Cerner Healthcare Solutions",
-    period: "Jul 2017 — Dec 2017",
-    logo: cernerLogo,
-    summary: "Quality ownership across complex workflows.",
-    bullets: [
-      "Executed 500+ test plans; logged 200+ bugs improving quality by ~40%.",
-      "Created 1000+ test cases incl. load‑test scenarios.",
-    ],
-    tech: ["TouchStone", "Eggplant", "Agile/Scrum"],
+    tech: ["Selenium", "Python", "Ruby", "Java", "Capybara", "Agile"],
+    link: "https://www.oracle.com/industries/health/",
   },
 ];
 
 export default function Experience() {
   return (
-    <Container id="experience" size="sm" mt={40}>
-      <Title order={2} align="center">
-        Experience
-      </Title>
+    <Container id="experience" size="lg" mt={38} className="section-anchor">
+      <Stack spacing="md" mb="lg">
+        <Badge color="cyan" variant="light" w="fit-content">
+          Career Journey
+        </Badge>
+        <Title order={2} className="section-title">
+          Engineering Ownership Across Product, Platform, and Quality
+        </Title>
+      </Stack>
 
-      <Timeline bulletSize={24} lineWidth={2} mt="xl">
-        {roles.map((r, index) => (
+      <Timeline active={ROLES.length - 1} bulletSize={20} lineWidth={3}>
+        {ROLES.map((role) => (
           <Timeline.Item
-            key={index}
-            // The custom 'bullet' prop has been removed
-            title={`${r.role} · ${r.company}`}
-          >
-            <Group position="apart" align="center">
-              <Text
-                size="sm"
-                fw="500"
-                color="orange"
-                sx={{ alignSelf: "flex-end" }}
-              >
-                {r.period}
-              </Text>
-
-              <Anchor
-                sx={{ cursor: "pointer" }}
-                href={
-                  r.company === "SenecaGlobal"
-                    ? "https://senecaglobal.com"
-                    : "https://cerner.com"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={r.logo}
-                  alt={`${r.company} logo`}
-                  width={80}
-                  height="100%" // You can easily adjust this size
-                  mt="md"
-                  radius="sm"
-                />
-              </Anchor>
-            </Group>
-
-            <Card withBorder radius="md" p="lg" mt="md">
-              <Text fw={600} size="md">
-                {r.summary}
-              </Text>
-              <List size="sm" spacing={4} mt="xs">
-                {r.bullets.map((b, i) => (
-                  <List.Item key={i}>{b}</List.Item>
-                ))}
-              </List>
-              <Group spacing={6} mt="xs">
-                {r.tech.map((t) => (
-                  <Badge key={t} color="blue" variant="light">
-                    {t}
-                  </Badge>
-                ))}
+            key={`${role.company}-${role.period}`}
+            title={
+              <Group position="apart" align="center">
+                <Text fw={700}>{role.role}</Text>
+                <Badge color="amber" variant="light">
+                  {role.period}
+                </Badge>
               </Group>
+            }
+          >
+            <Card radius="lg" p="lg" mt="sm" withBorder>
+              <Stack spacing={12}>
+                <Group position="apart">
+                  <Text fw={700}>{role.company}</Text>
+                  <Anchor href={role.link} target="_blank" rel="noopener noreferrer">
+                    <Image
+                      src={role.logo}
+                      alt={`${role.company} logo`}
+                      width={88}
+                      fit="contain"
+                    />
+                  </Anchor>
+                </Group>
+                <Text className="muted-copy">{role.summary}</Text>
+                <List spacing={7}>
+                  {role.points.map((point) => (
+                    <List.Item key={point}>{point}</List.Item>
+                  ))}
+                </List>
+                <Group spacing={8}>
+                  {role.tech.map((item) => (
+                    <Badge key={item} color="cyan" variant="outline">
+                      {item}
+                    </Badge>
+                  ))}
+                </Group>
+              </Stack>
             </Card>
           </Timeline.Item>
         ))}
